@@ -1,0 +1,138 @@
+<?xml version = "1.0"  encoding = "utf-8" ?>
+<!DOCTYPE HTML PUBLIC "-//w3c//DTD XHTML 1.0 Strict//EN"
+
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Fruit Sales</title>
+
+    <!-- Javascript to check user input -->
+    <script type="text/javascript">
+        function checkQty(fruitQty) {
+            //console.log(fruitQty.value + "\t" + isNaN(fruitQty.value));
+            if(isNaN(fruitQty.value) || fruitQty.value < 0){
+                alert("Please input non-negative values for your order");
+                document.getElementById("totalValue").value = "NaN";
+                return false;
+            } else updateTotal();
+
+        }
+
+        function isEmpty(){
+            if (document.getElementById("nApples").value == "" 
+                    || document.getElementById("nOranges").value == "" 
+                    || document.getElementById("nBananas").value == "" 
+                    || document.getElementById("name").value == "" ){
+        		
+                alert("Please make sure all fields are filled");
+                return false;
+        	}
+            return true;
+        }
+
+        function updateTotal(){
+            var a = document.getElementById("nApples").value;
+        	var o = document.getElementById("nOranges").value;
+        	var b = document.getElementById("nBananas").value;
+
+            //If valid inputs, display total
+        	if(!isNaN(a) && !isNaN(o) && !isNaN(b)){
+        		var result = a * 0.69 + o * 0.59 + b * 0.39;
+	        	total = result.toFixed(2);
+	        	document.getElementById("totalValue").value = total;
+                return true;
+        	}
+            return false;      
+        }
+        function isValid(){
+            return isEmpty()
+            && checkQty(document.getElementById('nApples'))
+            && checkQty(document.getElementById('nOranges'))
+            && checkQty(document.getElementById('nBananas'));
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Welcome To The Annual Fruit Sales</h2>
+    <form action="./order.php" method="POST" onsubmit="return isValid()">
+        <!-- Text widgets to collect the customer's name -->
+        <table>
+            <tr>
+                <td>Buyer's Name: </td>
+                <td><input type="text" name="customer" id="name" size="20" autofocus="true"/></td>
+            </tr>
+        </table>
+        <p />
+
+        <!-- Table to collect number of fruit ordered -->
+        <table border="border">
+            <!-- Column headings -->
+            <tr>
+                <th>Produce</th>
+                <th>Unit Price ($SGD)</th>
+                <th>Quantity</th>
+            </tr>
+
+            <!-- Apple row -->
+            <tr>
+                <td>Apples</td>
+                <td align="center">$0.69</td>
+                <td align="center">
+                    <input type="text" name="apples" id="nApples" size="3"
+                    onchange="checkQty(this);"/>
+                </td>
+            </tr>
+
+            <!-- Orange row -->
+            <tr>
+                <td>Oranges</td>
+                <td align="center">$0.59</td>
+                <td align="center">
+                    <input type="text" name="oranges" id="nOranges" size="3"
+                    onchange="checkQty(this);"/>
+                </td>
+            </tr>
+
+            <!-- Banana row -->
+            <tr>
+                <td>Bananas</td>
+                <td align="center">$0.39</td>
+                <td align="center">
+                    <input type="text" name="bananas" id="nBananas" size="3"
+                    onchange="checkQty(this);"/>
+                </td>
+            </tr>
+        </table>
+
+        <p />
+
+        <!-- Payment Section-->
+        <h3>Payment</h3>
+        <h4>Total =
+            <input type="text" name="total" id="totalValue" onfocus="this.blur();">
+        </h4>
+
+        <!-- Payment type section-->
+        <p>
+            <!-- Radio dials for payment type-->
+            <input type="radio" name="payment" value="Visa" checked="checked" /> Visa
+            <br/>
+
+            <input type="radio" name="payment" value="MC" /> Master Card
+            <br />
+
+            <input type="radio" name="payment" value="Discover" /> Discover
+            <br />
+            <br />
+
+            <!-- Submit Order Button-->
+            <input type="submit" value="Submit Order" />
+        </p>
+    </form>
+</body>
+
+</html>
