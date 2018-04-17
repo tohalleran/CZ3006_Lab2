@@ -38,15 +38,15 @@
       $bananasOredered += $nBananas;
 
       // Lock the file to prevent other processes from accessing the file
-      if (flock($file, LOCK_EX)) {
-        // Write to file
-        fwrite($file, "Total number of apples: ".$applesOrdered."\r\n");
-        fwrite($file, "Total number of oranges: ".$orangesOrdered."\r\n");
-        fwrite($file, "Total number of bananas: ".$bananasOredered."\r\n");
-        flock($file, LOCK_UN);  //Unlock the file
-      } else {
-          die("Couldn't get the lock!");
-      }       
+      // if (flock($file, LOCK_EX)) {
+      //   // Write to file
+      //   fwrite($file, "Total number of apples: ".$applesOrdered."\r\n");
+      //   fwrite($file, "Total number of oranges: ".$orangesOrdered."\r\n");
+      //   fwrite($file, "Total number of bananas: ".$bananasOredered."\r\n");
+      //   flock($file, LOCK_UN);  //Unlock the file
+      // } else {
+      //     die("Couldn't get the lock!");
+      // }       
 
       // Close the file!
       fclose($file);
