@@ -22,6 +22,7 @@
       $filename = 'order.txt';
       
       // Retrieve data from order.txt
+      // If no such file exists, create it!
       if(file_exists($filename)){
         $file = fopen($filename, 'r+');
 			  $file_lines[] = file($file);
@@ -55,7 +56,8 @@
     <h4> Customer: <?php print $customerName;?></h4>
     
     <p /> <p />
-
+      
+    <!-- Make a table specifying the number of fruit ordered -->
     <table border = "border">
       <caption> Order Information </caption>
       <tr>
@@ -86,6 +88,7 @@
     
     <p /> <p />
 
+    <!-- Print the number of fruit ordered, total charged, and payment type -->
     <?php
       printf ("You ordered %d fruit items <br />", $nApples + $nBananas + $nOranges);
       printf ("Your total bill is: $%5.2f <br />", $total);
